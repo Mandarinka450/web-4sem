@@ -1,0 +1,47 @@
+{
+  "mappings": [
+    {
+      "request": {
+        "url": "/one",
+        "method": "GET"
+      },
+      "response": {
+        "status": 404,
+        "jsonBody": {"status":"Error","message":"Endpoint not found"},
+        "headers": {
+          "Content-Type": "application/json"
+        }
+      }
+    },
+    {
+      "request": {
+        "url": "/users",
+        "method": "GET"
+      },
+      "response": {
+        "status": 200,
+        "bodyFileName": "../__files/users.json"
+      }
+    },
+    {
+      "request": {
+        "url": "/dogs",
+        "method": "GET"
+      },
+      "response": {
+        "status": 200,
+        "body": "I love dogs"
+      }
+    },
+    {
+      "request": {
+        "urlPath": "/cat",
+        "method": "GET"
+      },
+      "response": {
+        "status": 200,
+        "body": "I love cats"
+      }
+    }
+  ]
+}
