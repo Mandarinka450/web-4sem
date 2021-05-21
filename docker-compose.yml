@@ -1,0 +1,27 @@
+version: "3"
+services:
+  nginx:
+    container_name: project-nginx
+    build:
+      context: .
+      dockerfile: deploy/nginx/Dockerfile
+    volumes:
+      - ./deploy/nginx/templates:/etc/nginx/templates
+      - ./public/images:/usr/share/nginx/html/images
+      - ./public/documents:/usr/share/nginx/html/documents
+      - ./public/videos:/usr/share/nginx/html/videos
+    ports:
+      - "8081:80"
+    environment:
+      - NGINX_CUSTOM_SERVER_NAME=project-2021.local
+      - NGINX_SYMFONY_SERVER_NAME=project-symfony.local
+      - NGINX_NASTYA_SERVER_NAME=project-nastya.local
+
+  php:
+    container_name: project-php
+    build:
+      context: .
+      dockerfile: deploy/php-fpm/Dockerfile
+    volumes:
+      - ./public:/data/public
+      - ./public/images:/data/public/images
