@@ -22,6 +22,8 @@ db.Workers.update({"_id":5,"name":"Анастасия"},{$set:{"name":"Алин�
 
 db.Department.update({_id : 30}, {_id: 30, mobile_phone : "+79245672349"}, {upsert: false})
 
+db.Workers.remove({id_position: {$lt : 12}}, true)
+
 db.Department.update({_id : 30}, {_id: 30, name_department:"Отдел маркетинга", mobile_phone : "+79245672349", id_boss:42}, {upsert: false})
 
 db.Workers.aggregate([
