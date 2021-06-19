@@ -1,0 +1,35 @@
+security:
+    encoders:
+        # this internal class is used by Symfony to represent in-memory users
+        Symfony\Component\Security\Core\User\User: 'auto'
+    # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
+    providers:
+        backend_users:
+            memory:
+                users:
+                    admin: { password: '$argon2id$v=19$m=65536,t=4,p=1$YU81N0hTTzRsU3lya2hDcw$JdBC91YHI66wvBQYaGGSlZmpsWLEFzdtwsRH6jmUqwM', roles: ['ROLE_ADMIN'] } #qwer45
+                    user: { password: '$argon2id$v=19$m=65536,t=4,p=1$TXVyZUhNTEtlai9LRVYvYg$NSvtIq+/qGQVGPbh2bJKPq1ajDDogtKt1p1fGxn7328', roles: ['ROLE_USER'] }  #qwerty2
+                    
+    firewalls:
+        dev:
+            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+        main:
+            pattern: ^/api/
+            security: true
+            anonymous: false
+            provider: backend_users
+            http_basic:
+                realm: Secured Area
+
+            # activate different ways to authenticate
+            # https://symfony.com/doc/current/security.html#firewalls-authentication
+
+            # https://symfony.com/doc/current/security/impersonating_user.html
+            # switch_user: true
+
+    # Easy way to control access for large sections of your site
+    # Note: Only the *first* access control that matches will be used
+    access_control:
+        - { path: ^/api, roles: ROLE_ADMIN }
+        
